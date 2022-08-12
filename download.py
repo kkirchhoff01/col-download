@@ -41,12 +41,6 @@ def log_message(message, error=False):
 log_message("Running...")
         
 def parse_date(name):
-    # Date parsing can be somewhat
-    # unpredictable when it comes to random
-    # years/weekdays in titles, so we'll
-    # validate that these values actually exist
-    day_found, month_found, year_found = \
-        False, False, False
     for n in name.split(' '):
         try:
             has_weekday = any(
@@ -55,6 +49,10 @@ def parse_date(name):
             if has_weekday:
                 continue
             new_date = parser.parse(n).date()
+            # Date parsing can be somewhat
+            # unpredictable when it comes to random
+            # years/weekdays in titles, so we'll
+            # validate that these values actually exist
             if str(new_date.month) not in name and \
                     calendar.month_name[new_date.month].lower() \
                     not in name.lower():
